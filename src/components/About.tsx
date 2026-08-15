@@ -4,10 +4,10 @@ import CountUp from 'react-countup';
 import { Target, Eye, Award, Users, Code2, Brain } from 'lucide-react';
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Projects Delivered', icon: <Code2 size={24} /> },
+  { value: 10, suffix: '+', label: 'Projects Delivered', icon: <Code2 size={24} /> },
   { value: 98, suffix: '%', label: 'Client Satisfaction', icon: <Award size={24} /> },
-  { value: 150, suffix: '+', label: 'Expert Engineers', icon: <Users size={24} /> },
-  { value: 30, suffix: '+', label: 'Countries Served', icon: <Brain size={24} /> },
+  { value: 3, suffix: '+', label: 'Expert Engineers', icon: <Users size={24} /> },
+  { value: 20, suffix: '+', label: 'Technologies Used', icon: <Brain size={24} /> },
 ];
 
 const values = [
@@ -93,7 +93,7 @@ export default function About() {
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -top-6 -right-6 navbar-glass rounded-2xl p-4 border border-yellow-400/30"
             >
-              <div className="font-orbitron text-3xl font-bold text-gold-gradient">10+</div>
+              <div className="font-orbitron text-3xl font-bold text-gold-gradient">6+</div>
               <div className="font-rajdhani text-sm text-gray-400">Years of Excellence</div>
             </motion.div>
 
@@ -102,7 +102,7 @@ export default function About() {
               transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -bottom-6 -left-6 navbar-glass rounded-2xl p-4 border border-blue-400/30"
             >
-              <div className="font-orbitron text-3xl font-bold text-blue-gradient">50+</div>
+              <div className="font-orbitron text-3xl font-bold text-blue-gradient">5+</div>
               <div className="font-rajdhani text-sm text-gray-400">Tech Partners</div>
             </motion.div>
 

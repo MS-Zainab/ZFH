@@ -97,9 +97,9 @@ export default function Hero() {
   };
 
   const stats = [
-    { icon: <Zap size={20} />, value: '500+', label: 'Projects Delivered' },
+    { icon: <Zap size={20} />, value: '10+', label: 'Projects Delivered' },
     { icon: <Shield size={20} />, value: '98%', label: 'Client Satisfaction' },
-    { icon: <Globe size={20} />, value: '30+', label: 'Countries Served' },
+    { icon: <Globe size={20} />, value: 'Multiple', label: 'Projects Served' },
   ];
 
   return (
@@ -185,7 +185,7 @@ export default function Hero() {
               transition={{ delay: 0.6 }}
               className="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-xl"
             >
-              Zenith Forge Hub (ZFH) is a premier IT & AI software company forging tomorrow's technology today. 
+              Zenith Forge Hub (ZFH) is a premier IT & AI software Team forging tomorrow's technology today. 
               We deliver cutting-edge solutions that empower businesses to reach the <span className="text-yellow-400 font-semibold">zenith of innovation</span>.
             </motion.p>
 

@@ -24,7 +24,10 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
       exit={{ opacity: 0, scale: 1.1 }}
       transition={{ duration: 0.6 }}
       className="fixed inset-0 z-[100] flex items-center justify-center"
-      style={{ background: 'linear-gradient(135deg, #020810 0%, #050d1a 50%, #020810 100%)' }}
+      style={{
+        background:
+          'linear-gradient(135deg, #020810 0%, #050d1a 50%, #020810 100%)',
+      }}
     >
       <div className="absolute inset-0 grid-bg opacity-20" />
 
@@ -33,10 +36,18 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
-          transition={{ duration: 0.8, type: 'spring', stiffness: 200 }}
+          transition={{
+            duration: 0.8,
+            type: 'spring',
+            stiffness: 200,
+          }}
           className="mb-6"
         >
-          <img src="/images/logo.png" alt="ZFH Logo" className="w-28 h-28 object-contain logo-glow" />
+          <img
+            src="/images/logo.png"
+            alt="ZFH Logo"
+            className="w-28 h-28 object-contain logo-glow"
+          />
         </motion.div>
 
         {/* Company Name */}
@@ -51,7 +62,10 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
             <span className="text-white">FORGE </span>
             <span className="text-blue-gradient">HUB</span>
           </div>
-          <div className="font-rajdhani text-sm tracking-[0.5em] text-gray-500">ZFH TECHNOLOGIES</div>
+
+          <div className="font-rajdhani text-sm tracking-[0.5em] text-gray-500">
+            ZFH TECHNOLOGIES
+          </div>
         </motion.div>
 
         {/* Loading bar */}
@@ -64,9 +78,16 @@ function LoadingScreen({ onComplete }: { onComplete: () => void }) {
           <motion.div
             initial={{ width: '0%' }}
             animate={{ width: '100%' }}
-            transition={{ delay: 0.9, duration: 1.6, ease: 'easeInOut' }}
+            transition={{
+              delay: 0.9,
+              duration: 1.6,
+              ease: 'easeInOut',
+            }}
             className="h-full rounded-full"
-            style={{ background: 'linear-gradient(90deg, #C9A84C, #3B82F6, #C9A84C)' }}
+            style={{
+              background:
+                'linear-gradient(90deg, #C9A84C, #3B82F6, #C9A84C)',
+            }}
           />
         </motion.div>
 
@@ -92,9 +113,15 @@ function ScrollToTop() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setVisible(window.scrollY > 500);
+    const handleScroll = () => {
+      setVisible(window.scrollY > 500);
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (
@@ -106,11 +133,18 @@ function ScrollToTop() {
           exit={{ opacity: 0, scale: 0 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+            })
+          }
           className="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full btn-primary flex items-center justify-center shadow-2xl pulse-gold"
           title="Scroll to top"
         >
-          <span className="font-orbitron text-lg font-bold text-[#050d1a]">↑</span>
+          <span className="font-orbitron text-lg font-bold text-[#050d1a]">
+            ↑
+          </span>
         </motion.button>
       )}
     </AnimatePresence>
@@ -120,33 +154,53 @@ function ScrollToTop() {
 // Chat widget
 function ChatWidget() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { from: 'bot', text: '👋 Hi! Welcome to Zenith Forge Hub. How can I help you today?' }
+
+  const [messages, setMessages] = useState<
+    Array<{ from: 'bot' | 'user'; text: string }>
+  >([
+    {
+      from: 'bot',
+      text: '👋 Hi! Welcome to Zenith Forge Hub. How can I help you today?',
+    },
   ]);
+
   const [input, setInput] = useState('');
 
-  const botReplies: Record<string, string> = {
-    default: "Thank you for your message! Our team will get back to you shortly. For immediate assistance, please email hello@zenithforgehub.com",
-    ai: "Our AI & ML services include custom model development, NLP systems, computer vision, and AI integration. Would you like to schedule a consultation?",
-    price: "Our project costs vary based on scope and complexity. Typical projects range from $10K to $500K+. Let's discuss your specific needs!",
-    contact: "You can reach us at hello@zenithforgehub.com or call +1 (555) ZFH-TECH. Or fill out our contact form on this page!",
-    services: "We offer AI/ML, Custom Software, Cloud & DevOps, Cybersecurity, Data Analytics, and Mobile App Development. Click on any service to learn more!",
-  };
+  // WhatsApp number in international format
+  const WHATSAPP_NUMBER = '923243214033';
 
   const handleSend = () => {
-    if (!input.trim()) return;
-    const userMsg = input.toLowerCase();
-    setMessages(prev => [...prev, { from: 'user', text: input }]);
+    const message = input.trim();
+
+    if (!message) {
+      return;
+    }
+
+    // Add user's message to the chat window
+    setMessages((prev) => [
+      ...prev,
+      {
+        from: 'user',
+        text: message,
+      },
+    ]);
+
+    // Clear input
     setInput('');
 
-    setTimeout(() => {
-      let reply = botReplies.default;
-      if (userMsg.includes('ai') || userMsg.includes('machine learning')) reply = botReplies.ai;
-      else if (userMsg.includes('price') || userMsg.includes('cost') || userMsg.includes('budget')) reply = botReplies.price;
-      else if (userMsg.includes('contact') || userMsg.includes('email') || userMsg.includes('phone')) reply = botReplies.contact;
-      else if (userMsg.includes('service') || userMsg.includes('what do you')) reply = botReplies.services;
-      setMessages(prev => [...prev, { from: 'bot', text: reply }]);
-    }, 800);
+    // Create WhatsApp message
+    const whatsappMessage = encodeURIComponent(
+      `Hi Zenith Forge Hub! 👋\n\n${message}`
+    );
+
+    // Open WhatsApp with the message ready to send
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+    window.open(
+      whatsappUrl,
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
 
   return (
@@ -154,34 +208,82 @@ function ChatWidget() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            initial={{
+              opacity: 0,
+              scale: 0.8,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.8,
+              y: 20,
+            }}
             className="mb-4 w-80 rounded-2xl overflow-hidden shadow-2xl"
-            style={{ border: '1px solid rgba(201, 168, 76, 0.3)', background: '#0A1628' }}
+            style={{
+              border: '1px solid rgba(201, 168, 76, 0.3)',
+              background: '#0A1628',
+            }}
           >
             {/* Header */}
-            <div className="px-4 py-3 flex items-center gap-3" style={{ background: 'linear-gradient(135deg, rgba(201,168,76,0.2), rgba(59,130,246,0.2))' }}>
-              <img src="/images/logo.png" alt="ZFH" className="w-8 h-8 object-contain" />
+            <div
+              className="px-4 py-3 flex items-center gap-3"
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(201,168,76,0.2), rgba(59,130,246,0.2))',
+              }}
+            >
+              <img
+                src="/images/logo.png"
+                alt="ZFH"
+                className="w-8 h-8 object-contain"
+              />
+
               <div>
-                <div className="font-orbitron text-xs font-bold text-white">ZFH Support</div>
+                <div className="font-orbitron text-xs font-bold text-white">
+                  ZFH Support
+                </div>
+
                 <div className="flex items-center gap-1">
                   <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
-                  <span className="font-rajdhani text-xs text-green-400">Online</span>
+
+                  <span className="font-rajdhani text-xs text-green-400">
+                    Online
+                  </span>
                 </div>
               </div>
-              <button onClick={() => setOpen(false)} className="ml-auto text-gray-400 hover:text-white text-lg">×</button>
+
+              <button
+                onClick={() => setOpen(false)}
+                className="ml-auto text-gray-400 hover:text-white text-lg"
+                aria-label="Close chat"
+              >
+                ×
+              </button>
             </div>
 
             {/* Messages */}
             <div className="h-64 overflow-y-auto p-4 space-y-3">
               {messages.map((msg, i) => (
-                <div key={i} className={`flex ${msg.from === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[80%] px-3 py-2 rounded-xl font-rajdhani text-sm ${
+                <div
+                  key={i}
+                  className={`flex ${
                     msg.from === 'user'
-                      ? 'bg-yellow-400 text-[#050d1a] rounded-br-none'
-                      : 'bg-white/10 text-gray-200 rounded-bl-none'
-                  }`}>
+                      ? 'justify-end'
+                      : 'justify-start'
+                  }`}
+                >
+                  <div
+                    className={`max-w-[80%] px-3 py-2 rounded-xl font-rajdhani text-sm ${
+                      msg.from === 'user'
+                        ? 'bg-yellow-400 text-[#050d1a] rounded-br-none'
+                        : 'bg-white/10 text-gray-200 rounded-bl-none'
+                    }`}
+                  >
                     {msg.text}
                   </div>
                 </div>
@@ -194,13 +296,20 @@ function ChatWidget() {
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSend()}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSend();
+                  }
+                }}
                 placeholder="Type a message..."
                 className="flex-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2 font-rajdhani text-sm text-white placeholder-gray-600 focus:outline-none focus:border-yellow-400/60"
               />
+
               <button
                 onClick={handleSend}
                 className="btn-primary px-3 py-2 rounded-xl font-bold text-xs"
+                aria-label="Send message on WhatsApp"
+                title="Send on WhatsApp"
               >
                 →
               </button>
@@ -209,15 +318,22 @@ function ChatWidget() {
         )}
       </AnimatePresence>
 
+      {/* Floating Chat Button */}
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setOpen(!open)}
         className="w-14 h-14 rounded-full btn-primary flex items-center justify-center shadow-2xl relative"
+        aria-label={open ? 'Close chat' : 'Open chat'}
       >
-        <span className="text-2xl">{open ? '×' : '💬'}</span>
+        <span className="text-2xl">
+          {open ? '×' : '💬'}
+        </span>
+
         {!open && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">1</span>
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
+            1
+          </span>
         )}
       </motion.button>
     </div>
@@ -230,7 +346,11 @@ export default function App() {
   return (
     <>
       <AnimatePresence>
-        {loading && <LoadingScreen onComplete={() => setLoading(false)} />}
+        {loading && (
+          <LoadingScreen
+            onComplete={() => setLoading(false)}
+          />
+        )}
       </AnimatePresence>
 
       {!loading && (
@@ -241,6 +361,7 @@ export default function App() {
           className="min-h-screen"
         >
           <Navbar />
+
           <main>
             <Hero />
             <About />
@@ -251,8 +372,11 @@ export default function App() {
             <Testimonials />
             <Contact />
           </main>
+
           <Footer />
+
           <ScrollToTop />
+
           <ChatWidget />
         </motion.div>
       )}
