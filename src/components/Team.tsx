@@ -6,7 +6,7 @@ import { Link, AtSign, Mail } from 'lucide-react';
 const team = [
   {
     name: 'Zainab Abbasi',
-    role: 'Founder & CEO',
+    role: 'Co-Founder & Developer',
     dept: 'Leadership',
     bio: 'Founder of Zenith Forge Hub, leading business strategy, innovation, and digital transformation. Passionate about building impactful technology solutions that help businesses grow.',
     avatar: 'ZA',
